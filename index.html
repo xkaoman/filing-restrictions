@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>PCT 國家安全申請限制查詢</title>
+  <style type="text/css">
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: #eef3f8;
+      color: #22313f;
+      font-family: "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 14px 28px 14px;
+    }
+    .header {
+      margin: 0 -14px 14px -14px;
+      padding: 26px 20px 22px 20px;
+      background: #23476b;
+      color: #fff;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 4px 16px rgba(30, 61, 90, .16);
+    }
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: .5px;
+    }
+    .header p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #eef6ff;
+    }
+    .note {
+      margin: 14px 0;
+      padding: 13px 15px;
+      background: #fff8d9;
+      border: 1px solid #e8d48a;
+      border-radius: 12px;
+      color: #4f4a32;
+      font-size: 14px;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #d6e0ea;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 5px 18px rgba(35, 71, 107, .07);
+    }
+    .panelTitle {
+      margin: 0 0 12px 0;
+      color: #23476b;
+      font-size: 19px;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      color: #364a5c;
+    }
+    select {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      margin: 0 0 10px 0;
+      padding: 10px 42px 10px 12px;
+      border: 1px solid #aebdca;
+      border-radius: 10px;
+      background: #fff;
+      color: #222;
+      font-size: 16px;
+      font-family: inherit;
+    }
+    button {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #2b6aa0;
+      color: #fff;
+      font-size: 17px;
+      font-family: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover, button:focus { background: #1d557f; }
+    .card {
+      margin-top: 14px;
+      padding: 17px;
+      border: 1px solid #d8e1e9;
+      border-radius: 12px;
+      background: #fbfcfe;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .country {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dce5ed;
+      color: #23476b;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.35;
+    }
+    .fieldTitle {
+      margin-top: 13px;
+      margin-bottom: 3px;
+      color: #53697b;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: .3px;
+    }
+    .fieldValue {
+      color: #222;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .restriction {
+      padding: 10px 12px;
+      border-left: 4px solid #2b6aa0;
+      border-radius: 6px;
+      background: #eef6fd;
+      color: #183d5e;
+      font-weight: bold;
+    }
+    .law { white-space: pre-line; }
+    .small {
+      color: #667784;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .footer {
+      margin-top: 16px;
+      padding: 0 3px;
+      color: #667784;
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .footer a {
+      color: #2b6aa0;
+      text-decoration: underline;
+    }
+
+    @media screen and (min-width: 600px) {
+      .page { padding: 24px 22px 36px 22px; }
+      .header {
+        margin: 0 0 18px 0;
+        padding: 28px 30px;
+        border-radius: 16px;
+      }
+      .header h1 { font-size: 31px; }
+      .panel { padding: 22px; }
+      .searchRow {
+        display: table;
+        width: 100%;
+      }
+      .searchCell {
+        display: table-cell;
+        vertical-align: bottom;
+      }
+      .selectCell { width: 74%; padding-right: 10px; }
+      .buttonCell { width: 26%; }
+      select, button { margin-bottom: 0; }
+    }
+
+    @media screen and (max-width: 360px) {
+      .page { padding-left: 10px; padding-right: 10px; }
+      .header { margin-left: -10px; margin-right: -10px; padding-left: 16px; padding-right: 16px; }
+      .header h1 { font-size: 24px; }
+      .country { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>PCT 國家安全申請限制查詢</h1>
+    <p>依 WIPO「國際申請與國家安全考量」資料整理。選擇國家後，可查看向外國專利局或 PCT 受理局提出申請前，是否可能有事前申請、許可或其他國家安全相關限制。</p>
+  </div>
+
+  <div class="note">注意：本工具供教育訓練與初步提示使用；實際案件仍應確認最新法律、PCT 申請人指南附件 B、當地代理人意見及官方規定。</div>
+
+  <div class="panel">
+    <div class="panelTitle">國家申請限制查詢</div>
+
+    <div class="searchRow">
+      <div class="searchCell selectCell">
+        <label for="countrySelect">選擇國家</label>
+        <select id="countrySelect" onchange="doSearch()"></select>
+      </div>
+      <div class="searchCell buttonCell">
+        <button type="button" onclick="doSearch()">查詢</button>
+      </div>
+    </div>
+
+    <div id="searchResult" class="card"></div>
+  </div>
+
+  <div class="footer">
+    資料來源：
+    <a href="https://www.wipo.int/zh/web/pct-system/texts/nat_sec" target="_blank">WIPO「International applications and national security considerations」</a>。<br>
+    本版本特別針對手機與平板螢幕進行自適應設計，並已移除測驗功能。
+  </div>
+</div>
+
+<script type="text/javascript">
+var countries = [
+  {code:"AM", name:"亞美尼亞", restriction:"在該國內作出的發明", law:"《發明、實用新型和工業設計法》第77條", note:"WIPO 已知申請限制清單。"},
+  {code:"AZ", name:"亞塞拜然", restriction:"含有國家秘密的申請", law:"《亞塞拜然共和國專利法》第25條", note:"WIPO 已知申請限制清單。"},
+  {code:"BE", name:"比利時", restriction:"由在比利時具有住所或主要營業所的自然人或法人提交的申請", law:"適用於可能涉及國防或國家安全利益的申請。", note:"WIPO 已知申請限制清單。"},
+  {code:"BG", name:"保加利亞", restriction:"由居民提交的申請", law:"適用於被保加利亞國防部門歸類為機密性質的申請。", note:"WIPO 已知申請限制清單。"},
+  {code:"BY", name:"白俄羅斯", restriction:"由在白俄羅斯具有住所或主要營業所的自然人或法人提交的申請", law:"《發明、實用新型和外觀設計專利法》第32條", note:"WIPO 已知申請限制清單。"},
+  {code:"CN", name:"中國", restriction:"在該國內作出的發明", law:"《中華人民共和國專利法》第4條與第19條；《中華人民共和國專利法實施細則》第8條與第9條", note:"WIPO 已知申請限制清單。"},
+  {code:"DE", name:"德國", restriction:"含有國家秘密的申請", law:"《專利法》第52節；《國際專利條約法》第3條第2節", note:"WIPO 已知申請限制清單。"},
+  {code:"DK", name:"丹麥", restriction:"由居民提交的申請", law:"《保密專利法合訂本》第2節與第2a節；《丹麥專利法》第70節。涉及戰爭物資或其製造方法者，須透過丹麥專利商標局提交，並經國防部長批准作為保密專利。", note:"WIPO 已知申請限制清單。"},
+  {code:"ES", name:"西班牙", restriction:"在該國內作出的發明；由居民提交的申請", law:"除非要求在 SPTO 提交的在先申請之優先權。《2015年7月24日關於專利的第24/2015號法》第163條", note:"WIPO 已知申請限制清單。"},
+  {code:"FI", name:"芬蘭", restriction:"由居民提交的申請", law:"《國防重要性發明法（551/1967）》第2節", note:"WIPO 已知申請限制清單。"},
+  {code:"FR", name:"法國", restriction:"由在法國具有住所或主要營業所的自然人或法人提交的申請", law:"除非要求在 INPI 提交的在先申請之優先權。《智慧財產法典》第 L 614-18 條", note:"WIPO 已知申請限制清單。"},
+  {code:"GB", name:"英國", restriction:"由居民提交的申請", law:"適用於涉及軍事技術，或其公開可能損害國家安全或公共安全的申請。《1977年專利法》第23節", note:"WIPO 已知申請限制清單。"},
+  {code:"GR", name:"希臘", restriction:"由國民提交的申請", law:"除非要求在 OBI 提交的在先申請之優先權。《總統法令第16/1991號》第3條第2款；《第4325/1963號國防發明法》第1條與第2條", note:"WIPO 已知申請限制清單。"},
+  {code:"HU", name:"匈牙利", restriction:"由在匈牙利具有住所或主要經營場所的自然人或法人提交的申請", law:"適用於可能關係到國防或安全的申請，除非要求在 HIPO 提交的在先申請之優先權。1995年第XXXIII號發明專利保護法第53條(5)、第142/1996號政府令等。", note:"WIPO 已知申請限制清單。"},
+  {code:"IL", name:"以色列", restriction:"由國民和居民提交的申請", law:"適用於主題為武器或彈藥，或其他具有軍事價值的申請。《專利法》5727-1967 第98條", note:"WIPO 已知申請限制清單。"},
+  {code:"IN", name:"印度", restriction:"由居民提交的申請", law:"除非以表格25請求並繳費後取得書面許可，或已就同一發明在印度提出專利申請且經過6週未收到禁止公開或傳送通知。《專利法》第39節", note:"WIPO 已知申請限制清單。"},
+  {code:"IT", name:"義大利", restriction:"由居民提交的申請", law:"除非國際申請要求超過60日前於義大利提交之國家申請的優先權，且該申請未受官方機密規範限制。2005年2月10日第30號法令第198(1)條等。", note:"WIPO 已知申請限制清單。"},
+  {code:"JP", name:"日本", restriction:"在該國內作出的發明", law:"適用於由政令依國際專利分類等規定之技術領域的發明，其公開可能危害國家及國民安全。《通過綜合實施經濟措施促進確保國家安全法》第78條", note:"WIPO 已知申請限制清單。"},
+  {code:"KR", name:"韓國", restriction:"由居民提交的申請", law:"適用於可能涉及國防利益的申請。《專利法》第41條", note:"WIPO 已知申請限制清單。"},
+  {code:"LU", name:"盧森堡", restriction:"由居民提交的申請", law:"若申請人居住在盧森堡，且國際申請涉及可能與國防有關之發明，須向盧森堡智慧財產局提交。1967年7月8日法第2章", note:"WIPO 已知申請限制清單。"},
+  {code:"ME", name:"蒙特內哥羅", restriction:"由國民和居民提交的申請", law:"《專利法》第124-125條。涉及對國防和安全具有重要意義之發明者，須向國防部提交，不得向 EPO 或國際局提交。", note:"WIPO 已知申請限制清單。"},
+  {code:"MY", name:"馬來西亞", restriction:"由居民提交的申請", law:"《1983年專利法》（第291號法案）第23A節", note:"WIPO 已知申請限制清單。"},
+  {code:"NO", name:"挪威", restriction:"在該國內作出的發明；由居民提交的申請；居民所擁有的發明", law:"適用於涉及軍事技術，或其公開可能損害國家安全的申請。專利法第71節；《國防重要性發明法》", note:"WIPO 已知申請限制清單。"},
+  {code:"PL", name:"波蘭", restriction:"由國民和居民提交的申請", law:"《工業產權法》第40條", note:"WIPO 已知申請限制清單。"},
+  {code:"PT", name:"葡萄牙", restriction:"由居民提交的申請", law:"《工業產權法典》第92條", note:"WIPO 已知申請限制清單。"},
+  {code:"RO", name:"羅馬尼亞", restriction:"在該國內作出的發明", law:"羅馬尼亞國民或居民必須直接向羅馬尼亞國家發明商標局提交涉及國家安全重要主題的國際申請。《第64/1991號專利法實施細則》第4(3)條與第7條", note:"WIPO 已知申請限制清單。"},
+  {code:"RU", name:"俄羅斯", restriction:"在該國內作出的發明", law:"《俄羅斯聯邦民法典》第1395條", note:"WIPO 已知申請限制清單。"},
+  {code:"SE", name:"瑞典", restriction:"在該國內作出的發明；由居民提交的申請；瑞典公司所擁有的發明", law:"適用於有關國防發明的申請。《國防發明法》第4節", note:"WIPO 已知申請限制清單。"},
+  {code:"SG", name:"新加坡", restriction:"由居民提交的申請", law:"《專利法》第34節", note:"WIPO 已知申請限制清單。"},
+  {code:"TR", name:"土耳其", restriction:"由居民提交的申請", law:"適用於涉及具有國家安全重要性主題的申請。《2017年1月10日關於工業產權第6769號法》第124(9)條", note:"WIPO 已知申請限制清單。"},
+  {code:"UG", name:"烏干達", restriction:"居住在烏干達的人員於提出國家申請後6週內向烏干達境外提出申請，必須取得書面授權；含有損害安全或公共安全資訊的申請不得作為國際專利申請提交", law:"2014年《工業產權法》第14與15節", note:"WIPO 已知申請限制清單。"},
+  {code:"US", name:"美國", restriction:"在該國內作出的發明", law:"《美國法典》第35篇第181、184-188條；37 CFR 5.11-5.20（國外申請許可相關規定）", note:"WIPO 已知申請限制清單。"},
+  {code:"VN", name:"越南", restriction:"由居民提交的申請", law:"除非已取得越南國家工業產權局書面許可，或已就同一發明向該局提出過專利申請。", note:"WIPO 已知申請限制清單。"},
+  {code:"TW", name:"台灣", restriction:"WIPO未列申請限制", law:"WIPO未列申請限制，惟仍應確認最新法令。", note:"非屬WIPO申請限制清單的國家。"},
+  {code:"CA", name:"加拿大", restriction:"WIPO未列申請限制", law:"WIPO未列申請限制，惟仍應確認最新法令。", note:"非屬WIPO申請限制清單的國家。"},
+  {code:"AU", name:"澳大利亞", restriction:"WIPO未列申請限制", law:"WIPO未列申請限制，惟仍應確認最新法令。", note:"非屬WIPO申請限制清單的國家。"},
+  {code:"NZ", name:"紐西蘭", restriction:"WIPO未列申請限制", law:"WIPO未列申請限制，惟仍應確認最新法令。", note:"非屬WIPO申請限制清單的國家。"},
+  {code:"CH", name:"瑞士", restriction:"WIPO未列申請限制", law:"WIPO未列申請限制，惟仍應確認最新法令。", note:"非屬WIPO申請限制清單的國家。"}
+];
+
+function byId(id) {
+  return document.getElementById(id);
+}
+
+function fillSelect(selId) {
+  var sel = byId(selId);
+  sel.options.length = 0;
+  var i;
+  for (i = 0; i < countries.length; i++) {
+    sel.options[sel.options.length] = new Option(
+      countries[i].name + "（" + countries[i].code + "）",
+      i
+    );
+  }
+}
+
+function htmlEscape(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;");
+}
+
+function showCountry(targetId, item) {
+  byId(targetId).innerHTML =
+    '<div class="country">' + htmlEscape(item.name) + '（' + htmlEscape(item.code) + '）</div>' +
+    '<div class="fieldTitle">申請限制</div>' +
+    '<div class="fieldValue restriction">' + htmlEscape(item.restriction) + '</div>' +
+    '<div class="fieldTitle">有關法規與備註</div>' +
+    '<div class="fieldValue law">' + htmlEscape(item.law) + '</div>' +
+    '<div class="fieldTitle">資料註記</div>' +
+    '<div class="small">' + htmlEscape(item.note) + '</div>';
+}
+
+function doSearch() {
+  var idx = parseInt(byId("countrySelect").value, 10);
+  if (!isNaN(idx) && countries[idx]) {
+    showCountry("searchResult", countries[idx]);
+  }
+}
+
+fillSelect("countrySelect");
+doSearch();
+</script>
+</body>
+</html>
